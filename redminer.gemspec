@@ -26,6 +26,7 @@ Gem::Specification.new do |s|
     "lib/redminer.rb",
     "lib/redminer/base.rb",
     "lib/redminer/issue.rb",
+    "redminer.gemspec",
     "test/helper.rb",
     "test/test_redminer.rb"
   ]
