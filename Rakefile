@@ -17,8 +17,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "redminer"
   gem.homepage = "http://github.com/insoul/redminer"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{Redmine rest api client}
+  gem.description = %Q{Redmine rest api client}
   gem.email = "insoul@thinkreals.com"
   gem.authors = ["insoul"]
   # dependencies defined in Gemfile
