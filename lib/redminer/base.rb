@@ -2,8 +2,9 @@ module Redminer
   class Base
     attr_accessor :server, :access_key
 
-    def initialize(host, port, access_key)
-      @server = Net::HTTP.new(host, port)
+    def initialize(host, access_key, options = {})
+      options = {:port => 80}.merge(options)
+      @server = Net::HTTP.new(host, options[:port])
       @access_key = access_key
     end
 
