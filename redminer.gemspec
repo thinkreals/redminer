@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["insoul"]
-  s.date = "2012-04-05"
+  s.date = "2012-04-10"
   s.description = "Redmine rest api client"
   s.email = "insoul@thinkreals.com"
   s.extra_rdoc_files = [
@@ -26,6 +26,8 @@ Gem::Specification.new do |s|
     "lib/redminer.rb",
     "lib/redminer/base.rb",
     "lib/redminer/issue.rb",
+    "lib/redminer/server.rb",
+    "lib/redminer/user.rb",
     "redminer.gemspec",
     "test/helper.rb",
     "test/test_redminer.rb"

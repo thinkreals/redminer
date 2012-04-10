@@ -1,34 +1,26 @@
 module Redminer
   class Issue < Redminer::Base
-    attr_reader :base, :id
-    attr_accessor :author, :project
-    attr_accessor :tracker, :status, :priority, :category
-    attr_accessor :subject, :description
-    attr_accessor :start_date, :due_date
-    attr_accessor :created_on, :updated_on
+    attr_reader :id
+    attr_accessor :author, :project,
+                  :tracker, :status, :priority, :category,
+                  :subject, :description,
+                  :start_date, :due_date,
+                  :created_on, :updated_on
 
-    def initialize(base, id = nil)
-      @base = base
+    def initialize(server, id = nil)
+      @server = server
       unless id.nil?
         @id = id
-        retrieve
+        self.retrieve
       end
     end
 
     def retrieve
-      response = base.get("/issues/#{id}.json")
+      response = server.get("/issues/#{id}.json")
       raise "#{id} issue does not exists" if response.nil?
-      origin = JSON.parse(response)["issue"]
-      origin.each_pair { |k, v|
-        if respond_to?("#{k}=")
-          send("#{k}=", v)
-        end
-      }
+      origin = response["issue"]
+      self.all = origin
       self
-    end
-
-    def self.exists?(id)
-      (self.new(id) and true) rescue false
     end
 
     def sync
@@ -36,21 +28,21 @@ module Redminer
     end
 
     def craete
-      params = {
-        :subject => @subject,
-        :description => @description,
-        :project => @project
-      }
-      base.post("/issues.json", params)
+      server.post("/issues.json", to_hash)
     end
+
     def update(note = nil)
-      params = {
-        :subject => @subject,
-        :description => @description,
-        :project => @project
-      }
-      params.merge!(:notes => note) unless note.nil?
-      base.put("/issues/#{id}.json", params)
+      params = to_hash.merge(:notes => note) unless note.nil?
+      server.put("/issues/#{id}.json", params)
     end
+
+    private
+      def to_hash
+        {
+          :subject => @subject,
+          :description => @description,
+          :project => @project
+        }
+      end
   end
 end
